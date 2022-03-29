@@ -29,7 +29,9 @@ window.addEventListener("load", () => {
       // Crida a l'API
       const apiWeatherKey = "48f0f025ade27e857f008e8e57c4fb60";
       const urlAPI = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&lang=ca&&exclude=minutely,hourly,alerts&units=metric&appid=${apiWeatherKey}`;
+      const urlAPIPrevisio = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&lang=ca&&exclude=minutely,hourly,alerts&units=metric&appid=${apiWeatherKey}`;
 
+      // Fetch temps actual
       fetch(urlAPI)
         .then((response) => {
           return response.json();
@@ -45,6 +47,15 @@ window.addEventListener("load", () => {
           temperature.textContent = `${data.main.temp} ºC`;
           //temps actual
           summary.textContent = data.weather[0].description;
+        });
+
+      // Fetch previsio
+      fetch(urlAPIPrevisio)
+        .then((response) => {
+          return response.json();
+        })
+        .then((dataPrevisio) => {
+          console.log(dataPrevisio);
         });
     });
   }
